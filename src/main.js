@@ -1,3 +1,5 @@
+// CMPM 120 SPRING 2023_LIYU SUN_ROCKET PATROL TUTORIAL
+
 let config =
 {
     type    : Phaser.AUTO,
