@@ -11,6 +11,7 @@ class Play extends Phaser.Scene
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('rocketship', './assets/rocketship.png');
         this.load.image('spaceship', './assets/spaceship.png');
+        this.load.image('caspaceship', './assets/caSpaceship.png');
         this.load.image('starfield', './assets/starfield.png');
 
         // load spritesheet
@@ -46,10 +47,12 @@ class Play extends Phaser.Scene
         // add rocketship (player 1)
         this.p1RocketShip = new Rocketship(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocketship').setOrigin(0.5, 0.5);
 
-        // add spaceships (x3)
-        this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4, 'spaceship', 0, 30).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2, 'spaceship', 0, 20).setOrigin(0, 0);
-        this.ship03 = new Spaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4, 'spaceship', 0, 10).setOrigin(0, 0);
+        // add spaceships (x4)
+        this.ship00 = new SpaceshipCA(this, game.config.width + borderUISize * 10, borderUISize * 4 - 10, 'caspaceship', 0, 50).setOrigin(0, 0);
+        this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4 + 15, 'spaceship', 0, 30).setOrigin(0, 0);
+        this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2 + 15, 'spaceship', 0, 20).setOrigin(0, 0);
+        this.ship03 = new Spaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4 + 10, 'spaceship', 0, 15).setOrigin(0, 0);
+        
         
         // define keyboard keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
@@ -111,6 +114,8 @@ class Play extends Phaser.Scene
 
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
+
+
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => 
         {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
@@ -119,13 +124,22 @@ class Play extends Phaser.Scene
         }, null, this);
 
 
+        this.text = this.add.text(32, 32);
+
+        // timedEvent = this.time.addEvent({ delay: 2000, callback: onEvent, callbackScope: this });
+
+        //  The same as above, but uses a method signature to declare it (shorter, and compatible with GSAP syntax)
+        this.timedEvent = this.time.delayedCall(game.settings.gameTimer, this.onEvent, [], this);
     }
 
     update()
     {   
+        this.text.setText(`Time Left: ${parseFloat(game.settings.gameTimer/1000 - ((this.timedEvent.getProgress())*(game.settings.gameTimer/1000))).toFixed(2)}`);
+
         // check key input for restart
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR))
         {
+            this.sound.stopAll();
             this.scene.restart();
             this.gameOver = false;
             
@@ -157,6 +171,7 @@ class Play extends Phaser.Scene
         {
             this.p1Rocket.update();
             this.p1RocketShip.update();
+            this.ship00.update();
             this.ship01.update();
             this.ship02.update();
             this.ship03.update();
@@ -181,6 +196,13 @@ class Play extends Phaser.Scene
             this.p1Rocket.x = this.p1RocketShip.x;
             this.shipExplode(this.ship01);
         }
+        if (this.checkCollision(this.p1Rocket, this.ship00))
+        {
+            this.p1Rocket.reset();
+            this.p1Rocket.x = this.p1RocketShip.x;
+            this.shipExplode(this.ship00);
+        }
+
 
         
         if (this.p1Rocket.y <= borderUISize * 3 + borderPadding)

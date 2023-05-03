@@ -26,11 +26,10 @@ class Menu extends Phaser.Scene
 
     create()
     {
-
         // menu text configuration
         let menuKeyConfig = 
         {
-            fontFamily: 'Courier',
+            fontFamily: 'MS Reference Sans Serif',
             fontSize: '28px',
             backgroundColor: '#CC000000',
             color: '#FFD700',
@@ -99,5 +98,6 @@ class Menu extends Phaser.Scene
             this.sound.play('sfx_select');
             this.scene.start('playScene');
         }
+
     }
 }
