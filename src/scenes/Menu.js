@@ -15,26 +15,28 @@ class Menu extends Phaser.Scene
 
         //load menu image
         this.load.image('menuArt', './assets/menuArt.png');
+        this.load.image('menuTextArt', './assets/rpr_menu_text0.png');
     }
 
     create()
     {
         // menu text configuration
-        // let menuConfig = 
-        // {
-        //     fontFamily: 'Courier',
-        //     fontSize: '28px',
-        //     backgroundColor: '#F3B141',
-        //     color: '#843605',
-        //     align: 'right',
-        //     padding:
-        //     {
-        //         top: 5,
-        //         bottom: 5,
-        //     },
-        //     fixedWidth: 0
-        // }
+        let menuKeyConfig = 
+        {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#CC000000',
+            color: '#FFD700',
+            align: 'right',
+            padding:
+            {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
 
+        // menu art
         const menuConfig = 
         {
             key: 'menuArt',
@@ -42,14 +44,24 @@ class Menu extends Phaser.Scene
             y: game.config.height/2
         };
 
+        // see: https://github.com/photonstorm/phaser3-examples/blob/master/public/src/game%20objects/sprites/create%20from%20config.js
         this.make.sprite(menuConfig);
 
-        // show menu text
-        // this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-        // this.add.text(game.config.width/2, game.config.height/2, 'Use ←→ arrows to move & (F) to fire', menuConfig).setOrigin(0.5);
-        // menuConfig.backgroundColor = '#00FF00';
-        // menuConfig.color = '#000';
-        // this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
+        // menu text art
+        const menuTextConfig = 
+        {
+            key: 'menuTextArt',
+            x: game.config.width/2,
+            y: game.config.height/2 - 3 * borderUISize
+        };
+
+        // see: https://github.com/photonstorm/phaser3-examples/blob/master/public/src/game%20objects/sprites/create%20from%20config.js
+        this.make.sprite(menuTextConfig);
+
+
+        // show menu key text
+        // this.add.text(game.config.width/2, game.config.height/2 + 3 * borderUISize, 'Use ←→ arrows to move & (F) to fire', menuKeyConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 3 * borderUISize, 'Press ← for Novice or → for Expert', menuKeyConfig).setOrigin(0.5);
 
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
