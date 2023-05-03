@@ -8,6 +8,7 @@
         Create a new title screen (e.g., new artwork, typography, layout) (10)
         Display the time remaining (in seconds) on the screen (10)
         Create a new enemy Spaceship type (w/ new artwork) that's smaller, moves faster, and is worth more points (15)
+        Using a texture atlas, create a new animated sprite for the Spaceship enemies (10)
 
 
 

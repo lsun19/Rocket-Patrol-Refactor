@@ -26,12 +26,6 @@ class Play extends Phaser.Scene
 
     create()
     {
-        this.input.on('gameobjectdown', (pointer, gameObject, event) => {
-            console.log(pointer);
-            console.log(gameObject);
-            console.log(event);
-            this.printMessage(`Pointer clicked on '${gameObject.texture.key}' at ${pointer.x}, ${pointer.y}`);
-        });
 
         let playMusic = this.sound.add('bgm');
         playMusic.play();
@@ -49,27 +43,16 @@ class Play extends Phaser.Scene
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
 
         // add rocket (player 1)
-        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocket').setOrigin(0.5, 0.5);
+        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocket').setOrigin(0.5, 0.5).setInteractive();
 
         // add rocketship (player 1)
-        this.p1RocketShip = new Rocketship(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocketship').setOrigin(0.5, 0.5);
+        this.p1RocketShip = new Rocketship(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocketship').setOrigin(0.5, 0.5).setInteractive();
 
         // add spaceships (x4)
         this.ship00 = new SpaceshipCA(this, game.config.width + borderUISize * 10, borderUISize * 4 - 10, 'caspaceship', 0, 50).setOrigin(0, 0);
         this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4 + 15, 'spaceship', 0, 30).setOrigin(0, 0);
         this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2 + 15, 'spaceship', 0, 20).setOrigin(0, 0);
         this.ship03 = new Spaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4 + 10, 'spaceship', 0, 15).setOrigin(0, 0);
-        
-        this.p1Rocket.setInteractive(
-            {
-                cursor: 'rocketship', pointer
-            });
-
-        this.p1Rocket.setInteractive(
-            {
-                cursor: 'rocketship', pointer
-            });
-
         
         // define keyboard keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
@@ -147,10 +130,51 @@ class Play extends Phaser.Scene
 
         //  The same as above, but uses a method signature to declare it (shorter, and compatible with GSAP syntax)
         this.timedEvent = this.time.delayedCall(game.settings.gameTimer, this.onEvent, [], this);
+
+        // scrolling camera
+        // const cursors = this.input.keyboard.createCursorKeys();
+
+        // const controlConfig = {
+        //     camera: this.cameras.main,
+        //     left: cursors.left,
+        //     right: cursors.right,
+        //     up: cursors.up,
+        //     down: cursors.down,
+        //     zoomIn: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q),
+        //     zoomOut: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E),
+        //     acceleration: 0.06,
+        //     drag: 0.0005,
+        //     maxSpeed: 1.0
+        // };
+
+        // this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
+
+        // const cam = this.cameras.main;
+
+        // const gui = new dat.GUI();
+
+        // const help = {
+        //     line1: 'Cursors to move',
+        //     line2: 'Q & E to zoom'
+        // }
+
+        // const f1 = gui.addFolder('Camera');
+        // f1.add(cam, 'x').listen();
+        // f1.add(cam, 'y').listen();
+        // f1.add(cam, 'scrollX').listen();
+        // f1.add(cam, 'scrollY').listen();
+        // f1.add(cam, 'rotation').min(0).step(0.01).listen();
+        // f1.add(cam, 'zoom', 0.1, 2).step(0.1).listen();
+        // f1.add(help, 'line1');
+        // f1.add(help, 'line2');
+        // f1.open();
     }
+
 
     update()
     {   
+        // this.controls.update(delta);
+
         this.text.setText(`Time Left: ${parseFloat(game.settings.gameTimer/1000 - ((this.timedEvent.getProgress())*(game.settings.gameTimer/1000))).toFixed(2)}`);
 
         // check key input for restart

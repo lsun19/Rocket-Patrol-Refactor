@@ -22,6 +22,8 @@ class Menu extends Phaser.Scene
         //load menu image
         this.load.image('menuArt', './assets/menuArt.png');
         this.load.image('menuTextArt', './assets/rpr_menu_text0.png');
+
+        this.load.atlas('platformer_atlas', 'spaceship_sheet.png', 'spaceship_sheet.json');
     }
 
     create()
@@ -93,7 +95,7 @@ class Menu extends Phaser.Scene
             this.game.settings = 
             {
                 spaceshipSpeed: 4,
-                gameTimer: 5000
+                gameTimer: 45000
             }
             this.sound.play('sfx_select');
             this.scene.start('playScene');
