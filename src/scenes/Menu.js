@@ -23,7 +23,6 @@ class Menu extends Phaser.Scene
         this.load.image('menuArt', './assets/menuArt.png');
         this.load.image('menuTextArt', './assets/rpr_menu_text0.png');
 
-        this.load.atlas('platformer_atlas', 'spaceship_sheet.png', 'spaceship_sheet.json');
     }
 
     create()

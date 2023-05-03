@@ -1,6 +1,6 @@
 // LIYU SUN_CMPM 120
 // ROCKET PATROL REMASTERED: SIDE 6
-// 20 HOURS
+// 24 HOURS
 /* MOD LISTS:
         Track a high score that persists across scenes and display it in the UI (5)
         Add your own (copyright-free) background music to the Play scene (please be mindful of the volume) (5)
