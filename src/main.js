@@ -3,7 +3,12 @@
 // 20 HOURS
 /* MOD LISTS:
         Track a high score that persists across scenes and display it in the UI (5)
-        
+        Add your own (copyright-free) background music to the Play scene (please be mindful of the volume) (5)
+            
+
+   CITATIONS:
+        Menu Art： https://github.com/photonstorm/phaser3-examples/blob/master/public/src/game%20objects/sprites/create%20from%20config.js
+
 */
 
 let config =

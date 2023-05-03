@@ -13,6 +13,9 @@ class Menu extends Phaser.Scene
         this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
         this.load.audio('sfx_thrusting', './assets/thrusting.wav');
 
+        //load background music
+        this.load.audio('bgm', './assets/genres electronica 8-bit (0b067c5dd7fc4555af449ed21650e1ba).mp3');
+
         //load menu image
         this.load.image('menuArt', './assets/menuArt.png');
         this.load.image('menuTextArt', './assets/rpr_menu_text0.png');
@@ -20,6 +23,7 @@ class Menu extends Phaser.Scene
 
     create()
     {
+
         // menu text configuration
         let menuKeyConfig = 
         {
@@ -87,7 +91,7 @@ class Menu extends Phaser.Scene
             this.game.settings = 
             {
                 spaceshipSpeed: 4,
-                gameTimer: 45000
+                gameTimer: 5000
             }
             this.sound.play('sfx_select');
             this.scene.start('playScene');

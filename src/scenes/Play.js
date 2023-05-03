@@ -25,6 +25,9 @@ class Play extends Phaser.Scene
 
     create()
     {
+        let playMusic = this.sound.add('bgm');
+        playMusic.play();
+
         // place tile sprite
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
 
@@ -133,6 +136,7 @@ class Play extends Phaser.Scene
         }
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT))
         {
+            this.sound.stopAll();
             this.scene.start("menuScene");
             this.gameOver = false;
 
