@@ -12,6 +12,7 @@ class Rocket extends Phaser.GameObjects.Sprite
 
         // add rocket sfx
         this.sfxRocket = scene.sound.add('sfx_rocket');
+        this.sfxRocket.volume = 0.1;
     }
 
     update()

@@ -27,6 +27,7 @@ class Play extends Phaser.Scene
     {
         let playMusic = this.sound.add('bgm');
         playMusic.play();
+        playMusic.volume = 0.2;
 
         // place tile sprite
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
@@ -136,7 +137,10 @@ class Play extends Phaser.Scene
         }
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT))
         {
+            // stop the music
             this.sound.stopAll();
+
+            // go back to the menu
             this.scene.start("menuScene");
             this.gameOver = false;
 
@@ -223,6 +227,24 @@ class Play extends Phaser.Scene
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
 
-        this.sound.play('sfx_explosion');
+        let explodeType = Math.floor(Math.random() * 4);;
+
+        switch (explodeType) {
+            case 1:
+                this.sound.play('sfx_explosion1');
+                break;
+        
+            case 2:
+                this.sound.play('sfx_explosion2');
+                break;
+
+            case 3:
+                this.sound.play('sfx_explosion3');
+                break;
+
+            default:
+                this.sound.play('sfx_explosion0');
+                break;
+        }
     }
 }

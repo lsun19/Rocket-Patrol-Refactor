@@ -19,6 +19,7 @@ class Rocketship extends Phaser.GameObjects.Sprite
         // fire button - hook in the entire sequence of JustDown to trigger single hit mechanics
         if (Phaser.Input.Keyboard.JustDown(keyLEFT) || Phaser.Input.Keyboard.JustDown(keyRIGHT))
         {
+            this.sfxThrusting.volume = 0.2;
             this.sfxThrusting.play();
         }
 

@@ -4,11 +4,12 @@
 /* MOD LISTS:
         Track a high score that persists across scenes and display it in the UI (5)
         Add your own (copyright-free) background music to the Play scene (please be mindful of the volume) (5)
-            
+        Create 4 new explosion sound effects and randomize which one plays on impact (10)
+
 
    CITATIONS:
-        Menu Art： https://github.com/photonstorm/phaser3-examples/blob/master/public/src/game%20objects/sprites/create%20from%20config.js
-
+        Menu Art        : https://github.com/photonstorm/phaser3-examples/blob/master/public/src/game%20objects/sprites/create%20from%20config.js
+        Play Music      : https://github.com/photonstorm/phaser3-examples/blob/master/public/src/audio/Web%20Audio/play%20audio%20file.js
 */
 
 let config =
