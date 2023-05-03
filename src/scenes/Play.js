@@ -10,9 +10,10 @@ class Play extends Phaser.Scene
         // load images/title sprites
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('rocketship', './assets/rocketship.png');
-        this.load.image('spaceship', './assets/spaceship.png');
+        this.load.image('spaceship', './assets/Spaceship.png');
         this.load.image('caspaceship', './assets/caSpaceship.png');
         this.load.image('starfield', './assets/starfield.png');
+        // this.load.atlas('spaceship_atlas', 'spaceshipsheet.png', 'spaceshipsheet.json');
 
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', 
@@ -43,10 +44,11 @@ class Play extends Phaser.Scene
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
 
         // add rocket (player 1)
-        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocket').setOrigin(0.5, 0.5).setInteractive();
+        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocket').setOrigin(0.5, 0.5);
 
         // add rocketship (player 1)
-        this.p1RocketShip = new Rocketship(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocketship').setOrigin(0.5, 0.5).setInteractive();
+        this.p1RocketShip = new Rocketship(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocketship').setOrigin(0.5, 0.5);
+
 
         // add spaceships (x4)
         this.ship00 = new SpaceshipCA(this, game.config.width + borderUISize * 10, borderUISize * 4 - 10, 'caspaceship', 0, 50).setOrigin(0, 0);
@@ -131,43 +133,7 @@ class Play extends Phaser.Scene
         //  The same as above, but uses a method signature to declare it (shorter, and compatible with GSAP syntax)
         this.timedEvent = this.time.delayedCall(game.settings.gameTimer, this.onEvent, [], this);
 
-        // scrolling camera
-        // const cursors = this.input.keyboard.createCursorKeys();
 
-        // const controlConfig = {
-        //     camera: this.cameras.main,
-        //     left: cursors.left,
-        //     right: cursors.right,
-        //     up: cursors.up,
-        //     down: cursors.down,
-        //     zoomIn: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q),
-        //     zoomOut: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E),
-        //     acceleration: 0.06,
-        //     drag: 0.0005,
-        //     maxSpeed: 1.0
-        // };
-
-        // this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
-
-        // const cam = this.cameras.main;
-
-        // const gui = new dat.GUI();
-
-        // const help = {
-        //     line1: 'Cursors to move',
-        //     line2: 'Q & E to zoom'
-        // }
-
-        // const f1 = gui.addFolder('Camera');
-        // f1.add(cam, 'x').listen();
-        // f1.add(cam, 'y').listen();
-        // f1.add(cam, 'scrollX').listen();
-        // f1.add(cam, 'scrollY').listen();
-        // f1.add(cam, 'rotation').min(0).step(0.01).listen();
-        // f1.add(cam, 'zoom', 0.1, 2).step(0.1).listen();
-        // f1.add(help, 'line1');
-        // f1.add(help, 'line2');
-        // f1.open();
     }
 
 
