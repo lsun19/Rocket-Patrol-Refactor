@@ -9,6 +9,7 @@ class Play extends Phaser.Scene
     {
         // load images/title sprites
         this.load.image('rocket', './assets/rocket.png');
+        this.load.image('rocketship', './assets/rocketship.png');
         this.load.image('spaceship', './assets/spaceship.png');
         this.load.image('starfield', './assets/starfield.png');
 
@@ -37,6 +38,9 @@ class Play extends Phaser.Scene
 
         // add rocket (player 1)
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocket').setOrigin(0.5, 0.5);
+
+        // add rocketship (player 1)
+        this.p1RocketShip = new Rocketship(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocketship').setOrigin(0.5, 0.5);
 
         // add spaceships (x3)
         this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4, 'spaceship', 0, 30).setOrigin(0, 0);
@@ -144,6 +148,7 @@ class Play extends Phaser.Scene
         if(!this.gameOver)
         {
             this.p1Rocket.update();
+            this.p1RocketShip.update();
             this.ship01.update();
             this.ship02.update();
             this.ship03.update();
@@ -153,17 +158,28 @@ class Play extends Phaser.Scene
         if (this.checkCollision(this.p1Rocket, this.ship03))
         {
             this.p1Rocket.reset();
+            this.p1Rocket.x = this.p1RocketShip.x;
             this.shipExplode(this.ship03);
         }
         if (this.checkCollision(this.p1Rocket, this.ship02))
         {
             this.p1Rocket.reset();
+            this.p1Rocket.x = this.p1RocketShip.x;
             this.shipExplode(this.ship02);
         }
         if (this.checkCollision(this.p1Rocket, this.ship01))
         {
             this.p1Rocket.reset();
+            this.p1Rocket.x = this.p1RocketShip.x;
             this.shipExplode(this.ship01);
+        }
+
+        
+        if (this.p1Rocket.y <= borderUISize * 3 + borderPadding)
+        {
+            this.isFiring = false;
+            this.p1Rocket.x = this.p1RocketShip.x;
+            this.p1Rocket.y = game.config.height - borderUISize - borderPadding - 32;
         }
 
     }

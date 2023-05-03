@@ -22,6 +22,15 @@ class Rocketship extends Phaser.GameObjects.Sprite
             this.sfxThrusting.play();
         }
 
+        if (keyLEFT.isDown && this.x >= borderUISize + this.width)
+        {
+            this.x -= this.moveSpeed;
+        }
+        else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width)
+        {
+            this.x += this.moveSpeed;
+        }
+
     }
 
     reset()

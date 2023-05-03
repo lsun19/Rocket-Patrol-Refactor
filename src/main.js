@@ -1,4 +1,10 @@
-// CMPM 120 SPRING 2023_LIYU SUN_ROCKET PATROL MOD
+// LIYU SUN_CMPM 120
+// ROCKET PATROL REMASTERED: SIDE 6
+// 20 HOURS
+/* MOD LISTS:
+        Track a high score that persists across scenes and display it in the UI (5)
+        
+*/
 
 let config =
 {
