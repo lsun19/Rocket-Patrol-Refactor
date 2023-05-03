@@ -26,6 +26,13 @@ class Play extends Phaser.Scene
 
     create()
     {
+        this.input.on('gameobjectdown', (pointer, gameObject, event) => {
+            console.log(pointer);
+            console.log(gameObject);
+            console.log(event);
+            this.printMessage(`Pointer clicked on '${gameObject.texture.key}' at ${pointer.x}, ${pointer.y}`);
+        });
+
         let playMusic = this.sound.add('bgm');
         playMusic.play();
         playMusic.volume = 0.2;
@@ -53,6 +60,16 @@ class Play extends Phaser.Scene
         this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2 + 15, 'spaceship', 0, 20).setOrigin(0, 0);
         this.ship03 = new Spaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4 + 10, 'spaceship', 0, 15).setOrigin(0, 0);
         
+        this.p1Rocket.setInteractive(
+            {
+                cursor: 'rocketship', pointer
+            });
+
+        this.p1Rocket.setInteractive(
+            {
+                cursor: 'rocketship', pointer
+            });
+
         
         // define keyboard keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
