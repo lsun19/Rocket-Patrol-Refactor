@@ -62,7 +62,7 @@ class Play extends Phaser.Scene
                 frameRate: 30
             });
 
-        // initialize score
+        // initialize scores
         this.p1Score = 0;
 
         // display score
@@ -83,6 +83,24 @@ class Play extends Phaser.Scene
 
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig);
 
+        // display best score
+        let scoreBestConfig = 
+        {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'center',
+            padding:
+            {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 250
+        }
+
+        this.scoreRight = this.add.text( (borderUISize + borderPadding) * 8 , borderUISize + borderPadding * 2, "Best Score: " + p1ScoreBest, scoreBestConfig);
+
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => 
@@ -91,6 +109,7 @@ class Play extends Phaser.Scene
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
+
 
     }
 
@@ -101,11 +120,23 @@ class Play extends Phaser.Scene
         {
             this.scene.restart();
             this.gameOver = false;
+            
+            // check and update the best score
+            if(this.p1Score >= p1ScoreBest)
+            {
+                p1ScoreBest = this.p1Score;
+            }
         }
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT))
         {
             this.scene.start("menuScene");
             this.gameOver = false;
+
+            // check and update the best score
+            if(this.p1Score >= p1ScoreBest)
+            {
+                p1ScoreBest = this.p1Score;
+            }
         }
 
         this.starfield.tilePositionX -= 4;

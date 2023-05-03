@@ -10,6 +10,9 @@ let config =
 
 let game = new Phaser.Game(config);
 
+// set globab variable for best score
+let p1ScoreBest = 0;
+
 // set UI sizes
 let borderUISize    = game.config.height / 15;
 let borderPadding   = borderUISize / 3;
