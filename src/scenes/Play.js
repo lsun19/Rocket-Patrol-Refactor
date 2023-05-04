@@ -10,10 +10,9 @@ class Play extends Phaser.Scene
         // load images/title sprites
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('rocketship', './assets/rocketship.png');
-        this.load.image('spaceship', './assets/Spaceship.png');
         this.load.image('caspaceship', './assets/caSpaceship.png');
         this.load.image('starfield', './assets/starfield.png');
-        // this.load.atlas('spaceship_atlas', 'spaceshipsheet.png', 'spaceshipsheet.json');
+        this.load.atlas('spaceship_atlas', './assets/spaceshipsheet.png', './assets/spaceshipsheet.json');
 
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', 
@@ -49,12 +48,37 @@ class Play extends Phaser.Scene
         // add rocketship (player 1)
         this.p1RocketShip = new Rocketship(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocketship').setOrigin(0.5, 0.5);
 
+        // animation config
+        // this.anims.create(
+        // {
+        //     key: 'flyingShipA',
+        //     frames: this.anims.generateFrameNames('spaceship_atlas', 
+        //     {
+        //         start: spaceshipTypeA0001,
+        //         end: spaceshipTypeA0003,
+        //         first: 0
+        //     }),
+        //     frameRate: 30
+        // });
+
+        //  // animation config
+        // this.anims.create(
+        // {
+        //     key: 'flyingShipB',
+        //     frames: this.anims.generateFrameNames('spaceship_atlas', 
+        //     {
+        //         start: spaceshipTypeB0001,
+        //         end: spaceshipTypeB0003,
+        //         first: 0
+        //     }),
+        //     frameRate: 30
+        // });
 
         // add spaceships (x4)
         this.ship00 = new SpaceshipCA(this, game.config.width + borderUISize * 10, borderUISize * 4 - 10, 'caspaceship', 0, 50).setOrigin(0, 0);
-        this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4 + 15, 'spaceship', 0, 30).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2 + 15, 'spaceship', 0, 20).setOrigin(0, 0);
-        this.ship03 = new Spaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4 + 10, 'spaceship', 0, 15).setOrigin(0, 0);
+        this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4 + 15, 'spaceship_atlas', 3, 30).setOrigin(0, 0);
+        this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2 + 15, 'spaceship_atlas', 0, 20).setOrigin(0, 0);
+        this.ship03 = new Spaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4 + 10, 'spaceship_atlas', 0, 15).setOrigin(0, 0);
         
         // define keyboard keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
