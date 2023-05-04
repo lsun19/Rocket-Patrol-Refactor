@@ -12,7 +12,6 @@ class Play extends Phaser.Scene
         this.load.image('rocketship', './assets/rocketship.png');
         this.load.image('caspaceship', './assets/caSpaceship.png');
         this.load.image('starfield', './assets/starfield.png');
-        this.load.atlas('spaceship_atlas', './assets/spaceshipsheet.png', './assets/spaceshipsheet.json');
 
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', 
@@ -46,33 +45,7 @@ class Play extends Phaser.Scene
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocket').setOrigin(0.5, 0.5);
 
         // add rocketship (player 1)
-        this.p1RocketShip = new Rocketship(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocketship').setOrigin(0.5, 0.5);
-
-        // animation config
-        // this.anims.create(
-        // {
-        //     key: 'flyingShipA',
-        //     frames: this.anims.generateFrameNames('spaceship_atlas', 
-        //     {
-        //         start: spaceshipTypeA0001,
-        //         end: spaceshipTypeA0003,
-        //         first: 0
-        //     }),
-        //     frameRate: 30
-        // });
-
-        //  // animation config
-        // this.anims.create(
-        // {
-        //     key: 'flyingShipB',
-        //     frames: this.anims.generateFrameNames('spaceship_atlas', 
-        //     {
-        //         start: spaceshipTypeB0001,
-        //         end: spaceshipTypeB0003,
-        //         first: 0
-        //     }),
-        //     frameRate: 30
-        // });
+        this.p1RocketShip = new Rocketship(this, game.config.width/2, game.config.height - borderUISize - borderPadding - 32, 'rocketship').setOrigin(0.5, 0.5).setInteractive();
 
         // add spaceships (x4)
         this.ship00 = new SpaceshipCA(this, game.config.width + borderUISize * 10, borderUISize * 4 - 10, 'caspaceship', 0, 50).setOrigin(0, 0);
