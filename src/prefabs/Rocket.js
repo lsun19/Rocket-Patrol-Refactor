@@ -8,30 +8,24 @@ class Rocket extends Phaser.GameObjects.Sprite
         // add object to the existing scene
         scene.add.existing(this);
         this.isFiring   = false;
-        this.moveSpeed  = 2;
+        this.moveSpeed  = 3;
 
         // add rocket sfx
         this.sfxRocket = scene.sound.add('sfx_rocket');
         this.sfxRocket.volume = 0.1;
+
     }
 
     update()
     {
-        if (!this.isFiring)
-        {   
-            // movement
-            if (keyLEFT.isDown && this.x >= borderUISize + this.width + 32)
-            {
-                this.x -= this.moveSpeed;
-            }
-            else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width - 32)
-            {
-                this.x += this.moveSpeed;
-            }
+        // fire button - hook in the entire sequence of JustDown to trigger single hit mechanics
+        if (Phaser.Input.Keyboard.JustDown(keyF) && this.isFiring == false)
+        {
+            this.isFiring = true;
+            this.sfxRocket.play();
         }
 
-        // fire button - hook in the entire sequence of JustDown to trigger single hit mechanics
-        if (Phaser.Input.Keyboard.JustDown(keyF))
+        if (game.input.mousePointer.primaryDown && this.isFiring == false)
         {
             this.isFiring = true;
             this.sfxRocket.play();
@@ -46,6 +40,30 @@ class Rocket extends Phaser.GameObjects.Sprite
         {
             this.isFiring = false;
         }
+
+        if (!this.isFiring)
+        {   
+            // movement
+            if (keyLEFT.isDown && this.x >= borderUISize + this.width + 32)
+            {
+                this.x -= this.moveSpeed;
+            }
+            else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width - 32)
+            {
+                this.x += this.moveSpeed;
+            }
+
+            // Move rocket with mouse
+            if (game.input.mousePointer.velocity.x < 0 && this.x >= borderUISize + this.width + 32)
+            {
+                this.x -= this.moveSpeed;
+            }
+            else if (game.input.mousePointer.velocity.x > 0 && this.x <= game.config.width - borderUISize - this.width - 32)
+            {
+                this.x += this.moveSpeed;
+            }
+        }
+
     }
 
     reset()

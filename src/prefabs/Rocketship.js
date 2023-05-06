@@ -8,10 +8,11 @@ class Rocketship extends Phaser.GameObjects.Sprite
         
         // add object to the existing scene
         scene.add.existing(this);
-        this.moveSpeed  = 2;
+        this.moveSpeed  = 3;
 
         // add rocket sfx
         this.sfxThrusting = scene.sound.add('sfx_thrusting');
+
     }
 
     update()
@@ -29,6 +30,16 @@ class Rocketship extends Phaser.GameObjects.Sprite
             this.x -= this.moveSpeed;
         }
         else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width)
+        {
+            this.x += this.moveSpeed;
+        }
+
+        // Move rocket with mouse
+        if (game.input.mousePointer.velocity.x < 0 && this.x >= borderUISize + this.width)
+        {
+            this.x -= this.moveSpeed;
+        }
+        else if (game.input.mousePointer.velocity.x > 0 && this.x <= game.config.width - borderUISize - this.width)
         {
             this.x += this.moveSpeed;
         }
